@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Your Business Name</title>
+    <style>
+        /* Reset styles and basic styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #fff; /* Light gray background */
+}
+
+header {
+    background-color:#fff; /* Green background for header */
+    color: #333; /* White text color */
+    padding: 10px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+    text-align: center;
+    
+}
+
+/* Ensure the nav bar is at the top left of the page */
+nav {
+    position: fixed; /* Keep the navigation bar at the top when scrolling */
+    top: 10px; /* Adjust the top margin as needed */
+    left: 10px; /* Adjust the left margin as needed */
+    z-index: 1000; /* Ensure the navigation bar is above other elements */
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex; /* Make the list items horizontal */
+}
+
+nav ul li {
+    margin: 0; /* Remove margin between items */
+}
+
+nav ul li a {
+    color: #008000; /* Green text color for navigation links */
+    text-decoration: none;
+    text-align: center;
+    padding: 0.5em 1em;
+    border: 2px solid #008000; /* Add a border with the same color as the text */
+    border-radius: 5px;
+    background-color: #fff; /* White background for navigation links */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for background and text color on hover */
+}
+
+nav ul li a:hover {
+    background-color: #3e8e41; /* Darker green background on hover */
+    color: #fff; /* White text color on hover */
+}
+
+
+.main-content {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color:#e0f7e0; /* White background for main content */
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.about-us, .mission-values, .team {
+    margin-bottom: 20px;
+}
+
+.team-member {
+    display: none;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #4CAF50; /* Green background for button */
+    color: #fff; /* White text color for button */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #45a049; /* Darker green background on hover */
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to GENESIS</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                </ul>
+                </nav>
+    </header>
+    <section class="main-content">
+    <div class="about-us">
+        <h2>Our Story</h2>
+        <p>Your Business Name was founded in 1xxx with a passion for [Mission Statement]. Since then, we’ve been [Highlight Key Milestones or Achievements].</p>
+    </div>
+
+    <div class="mission-values">
+        <h2>Our Mission</h2>
+        <p>At Your Business Name, we are committed to [Mission Statement]. Our core values include [List Core Values].</p>
+    </div>
+
+    <div class="team">
+        <h2>Meet the Team</h2>
+        <div class="team-member" id="team-member-1">
+            <h3>John Doe - Founder & CEO</h3>
+            <p>John is passionate about [Brief Bio].</p>
+        </div>
+        <div class="team-member" id="team-member-2">
+            <h3>Jane Smith - COO</h3>
+            <p>Jane brings expertise in [Brief Bio].</p>
+        </div>
+        <button onclick="toggleTeamMemberDetails()">CLICK TO VIEW</button>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2024 GENESIS. All rights reserved.</p>
+</footer>
+
+<script>
+    // Basic JavaScript for carousel functionality
+let currentIndex = 0;
+const items = document.querySelectorAll('.carousel-item');
+
+function showItem(index) {
+    items.forEach((item, i) => {
+        item.style.transform = `translateX(${100 * (i - index)}%)`;
+    });
+}
+
+function nextItem() {
+    currentIndex = (currentIndex + 1) % items.length;
+    showItem(currentIndex);
+}
+
+document.getElementById("signupButton").addEventListener("click", function() {
+    window.location.href = 'Dashboardsignup.html';
+});
+
+document.getElementById("loginButton").addEventListener("click", function() {
+    window.location.href = 'login.html';
+});
+
+document.getElementById("logo").addEventListener("click", function() {
+    window.location.href = 'index.html';
+});
+
+function prevItem() {
+    currentIndex = (currentIndex - 1 + items.length) % items.length;
+    showItem(currentIndex);
+}
+
+// Auto slide
+setInterval(nextItem, 5000);
+
+function toggleTeamMemberDetails() {
+    var teamMembers = document.querySelectorAll('.team-member');
+    teamMembers.forEach(function(member) {
+        member.style.display = (member.style.display === 'none' || member.style.display === '') ? 'block' : 'none';
+    });
+}
+
+</script>
+</body>
+</html>    

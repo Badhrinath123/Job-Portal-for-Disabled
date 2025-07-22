@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genesis - Jobs Posted</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #D0F0C0; /* Tea green */
+            color: #355E3B; /* Hunter green */
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #FFF; /* White background for the navigation row */
+            color: #355E3B; /* Hunter green text */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        header nav ul li {
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            color: #355E3B; /* Hunter green text */
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        header .auth-buttons {
+            display: flex;
+        }
+
+        header .auth-buttons button {
+            background-color: #D0F0C0; /* Tea green */
+            color: #355E3B; /* Hunter green text */
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        header .auth-buttons button a {
+            color: black; /* Black text for logout button */
+            text-decoration: none;
+        }
+
+        header .auth-buttons button:hover {
+            background-color: #C9E8B2; /* Lighter Tea green */
+        }
+
+        .main-content {
+            display: flex;
+            padding: 20px;
+        }
+        
+        .sidebar {
+            width: 200px;
+            margin-right: 20px;
+            background-color: #355E3B; /* Hunter green */
+            padding: 15px;
+            color: #FFF; /* White text */
+            border-radius: 5px;
+        }
+
+        .sidebar-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #355E3B; /* Hunter green */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: left;
+        }
+
+        .sidebar-button:hover {
+            background-color: #2C4D32; /* Darker Hunter green */
+        }
+
+        main {
+            height: 500px;
+            overflow-y: auto;
+            flex-grow: 1;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #355E3B; /* Hunter green */
+            color: #ecf0f1; /* Light text */
+            border-radius: 5px;
+        }
+
+        .hero-section h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .hero-section .contact-button {
+            background-color: #e74c3c;
+            color: #FFF; /* White text */
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero-section .contact-button:hover {
+            background-color: #c0392b;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button[type="submit"] {
+            background-color: #355E3B; /* Hunter green */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #2C4D32; /* Darker Hunter green */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #355E3B; /* Hunter green */
+            color: #FFF; /* White text */
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .row-icons {
+            display: flex;
+            justify-content: center;
+        }
+
+        .row-icons a {
+            color: #008000;
+            text-decoration: none;
+            font-size: 18px;
+            margin-left: 10px;
+        }
+
+        .row-icons a:hover {
+            color: #006600;
+        }
+
+        td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+td input[type="text"] {
+    width: calc(100% - 24px); /* Adjust width to match padding */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+.modal {
+    display:flexbox;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    margin-left:25%;
+    overflow: auto;
+
+   
+}
+
+.modal-content {
+    background-color:#ecfee4;
+    padding: 70px;
+    border-radius: 50px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.close-button {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Genesis</div>
+        <nav>
+            <ul>
+                <li><a href="employerdashboard">Home</a></li>
+                <li class="dropdown">
+                    <a href="#Employees">Employees</a>
+                </li>
+                <li class="dropdown">
+                    <a href="employerjobposted">Jobs</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#companies">Companies</a>
+                </li>
+                <li><a href="employerabout">About us</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <button><a href="{{ url_for('index') }}">Logout</a></button>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <aside class="sidebar">
+            <button class="sidebar-button" onclick="navigateTo('/employerpostjob')">Post a Job</button>
+            <button class="sidebar-button" onclick="navigateTo('/employerjobposted')">Jobs Posted</button>
+            <button class="sidebar-button" onclick="navigateTo('/employerreports')">Reports</button>
+            <button class="sidebar-button" onclick="navigateTo('/employershortlisted')">Shortlisted</button>
+        </aside>
+
+        <main>
+            <div class="container">
+                <h1>Jobs Posted</h1>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Company name</th>
+                            <th>Job Role</th>
+                            <th>Experience</th>
+                            <th>Salary</th>
+                            <th>Mode</th>
+                            <th>Required Technology Stack</th>
+                            <th>Company Location</th>
+                            <th>Job description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="jobs-table-body">
+                        {% for job in job_posts %}
+                        <tr data-id="{{ job[0] }}">
+                            <td>{{ job[1] }}</td>
+                            <td>{{ job[2] }}</td>
+                            <td>{{ job[3] }}</td>
+                            <td>{{ job[5] }}</td>
+                            <td>{{ job[6] }}</td>
+                            <td>{{ job[7] }}</td>
+                            <td>{{ job[8] }}</td>
+                            <td>{{ job[9] }}</td>
+                            <td>
+                                <div class="row-icons">
+                                    <a href="#" class="edit-row"><i class="fas fa-edit"></i></a>
+                                    <a href="#" class="delete-row"><i class="fas fa-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>                    
+                </table>
+            </div>
+        </main>
+    </div>
+    <div id="editModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <form id="editForm">
+                <input type="hidden" id="jobId">
+                <label for="companyName">Company Name</label>
+                <input type="text" id="companyName" name="company_name">
+    
+                <label for="jobRole">Job Role</label>
+                <input type="text" id="jobRole" name="job_role">
+    
+                <label for="experienceYears">Experience Years</label>
+                <input type="number" id="experienceYears" name="experience_years">
+    
+                <label for="experienceMonths">Experience Months</label>
+                <input type="number" id="experienceMonths" name="experience_months">
+    
+                <label for="salary">Salary</label>
+                <input type="number" id="salary" name="salary">
+    
+                <label for="mode">Mode</label>
+                <input type="text" id="mode" name="mode">
+    
+                <label for="technologyStack">Technology Stack</label>
+                <input type="text" id="technologyStack" name="technology_stack">
+    
+                <label for="companyLocation">Company Location</label>
+                <input type="text" id="companyLocation" name="company_location">
+    
+                <label for="jobDescription">Job Description</label>
+                <textarea id="jobDescription" name="job_description"></textarea>
+    
+                <button type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        function navigateTo(url){
+            window.location.href = url;
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            const editButtons = document.querySelectorAll('.edit-row');
+            const modal = document.getElementById('editModal');
+            const closeButton = document.querySelector('.close-button');
+            const editForm = document.getElementById('editForm');
+        
+            editButtons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const row = this.closest('tr');
+                    openEditModal(row);
+                });
+            });
+        
+            closeButton.addEventListener('click', function() {
+                modal.classList.add('hidden');
+            });
+        
+            editForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                saveForm();
+            });
+        
+            function openEditModal(row) {
+                const jobId = row.getAttribute('data-id');
+                document.getElementById('jobId').value = jobId;
+                document.getElementById('companyName').value = row.cells[0].innerText;
+                document.getElementById('jobRole').value = row.cells[1].innerText;
+                document.getElementById('experienceYears').value = row.cells[2].innerText.split('-')[0];
+                document.getElementById('experienceMonths').value = row.cells[2].innerText.split('-')[1];
+                document.getElementById('salary').value = row.cells[3].innerText.replace('$', '');
+                document.getElementById('mode').value = row.cells[4].innerText;
+                document.getElementById('technologyStack').value = row.cells[5].innerText;
+                document.getElementById('companyLocation').value = row.cells[6].innerText;
+                document.getElementById('jobDescription').value = row.cells[7].innerText;
+        
+                modal.classList.remove('hidden');
+            }
+        
+            function saveForm() {
+                const updatedData = {
+                    id: document.getElementById('jobId').value,
+                    company_name: document.getElementById('companyName').value,
+                    job_role: document.getElementById('jobRole').value,
+                    experience_years: document.getElementById('experienceYears').value,
+                    experience_months: document.getElementById('experienceMonths').value,
+                    salary: document.getElementById('salary').value,
+                    mode: document.getElementById('mode').value,
+                    technology_stack: document.getElementById('technologyStack').value,
+                    company_location: document.getElementById('companyLocation').value,
+                    job_description: document.getElementById('jobDescription').value
+                };
+        
+                fetch('/update_job', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(updatedData),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        updateTableRow(updatedData);
+                        modal.classList.add('hidden');
+                    } else {
+                        alert('Failed to update job');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        
+            function updateTableRow(updatedData) {
+                const row = document.querySelector(`tr[data-id="${updatedData.id}"]`);
+                row.cells[0].innerText = updatedData.company_name;
+                row.cells[1].innerText = updatedData.job_role;
+                row.cells[2].innerText = `${updatedData.experience_years}-${updatedData.experience_months}`;
+                row.cells[3].innerText = `$${updatedData.salary}`;
+                row.cells[4].innerText = updatedData.mode;
+                row.cells[5].innerText = updatedData.technology_stack;
+                row.cells[6].innerText = updatedData.company_location;
+                row.cells[7].innerText = updatedData.job_description;
+            }
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteButtons = document.querySelectorAll('.delete-row');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const row = this.closest('tr');
+                    const jobId = row.getAttribute('data-id');
+
+                    fetch('/delete_job', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ id: jobId }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            row.remove();
+                        } else {
+                            alert('Failed to delete job');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                });
+            });
+        });
+        </script>
+        
+</body>
+</html>

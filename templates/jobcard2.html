@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genesis - Employee Dashboard</title>
+    <link rel="stylesheet" href="main.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #D0F0C0; /* Tea green */
+            color: #355E3B; /* Hunter green */
+            overflow: auto; /* Ensure page can scroll */
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #FFF; /* White background for the navigation row */
+            color: #355E3B; /* Hunter green text */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+        }
+
+        header .logo {
+            width: 40px;
+            height: 40px;
+            background-color: #355E3B; /* Placeholder for logo background */
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        header .title {
+            font-size: 24px;
+            font-weight: bold;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        header .auth-buttons {
+            display: flex;
+        }
+
+        header .auth-buttons button {
+            background-color: #D0F0C0; /* Tea green */
+            color: black; /* Black text */
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        header .auth-buttons button:hover {
+            background-color: #C9E8B2; /* Lighter Tea green */
+        }
+
+        .main-content {
+            display: flex;
+            padding: 20px;
+            flex: 1;
+        }
+
+    .sidebar {
+            min-width: 220px;
+            margin-right: 20px;
+            background-color: #355E3B; /* Hunter green */
+            padding: 15px;
+            color: #FFF; /* White text */
+            border-radius: 5px;
+        }
+
+        .sidebar-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #355E3B; /* Hunter green */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: left;
+        }
+
+        .sidebar-button:hover {
+            background-color: #2C4D32; /* Darker Hunter green */
+        }
+
+
+
+
+
+
+        main {
+            flex-grow: 1;
+            background-color: #FFF; /* White background for main content */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .description {
+            margin-bottom: 20px;
+        }
+
+        .back-button {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            color: #355E3B;
+            text-decoration: none;
+        }
+
+        .back-button img {
+            width: 24px;
+            height: 24px;
+        }
+
+        h1, h2 {
+            color: black; /* Black text for headings */
+        }
+
+        p {
+            margin: 5px 0;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+        .description button {
+            background-color: white;
+            color: #355E3B; /* Hunter green text */
+            padding: 10px 20px;
+            border: 2px solid #355E3B; /* Hunter green border */
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            width: 100%;
+            text-align: center;
+        }
+
+        .description button:hover {
+            background-color: #355E3B; /* Hunter green background */
+            color: white; /* White text */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://via.placeholder.com/40" alt="Logo">
+        </div>
+        <div class="title">Employee Dashboard</div>
+        <div class="auth-buttons">
+            <button><a href="login.html" style="color: black; text-decoration: none;">Logout</a></button>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <aside class="sidebar">
+            <button class="sidebar-button" onclick="navigateTo('/employeedashboard')">Home</button>
+            <button class="sidebar-button" onclick="navigateTo('/employeefindjobs')">Find Jobs</button>
+            <button class="sidebar-button" onclick="navigateTo('/employeejobsapplied')">Jobs Applied</button>
+            <button class="sidebar-button" onclick="navigateTo('/employeejobsstatus')">Job Status</button>
+            <button class="sidebar-button" onclick="navigateTo('/employeeprofile')">Profile</button>
+        </aside>
+
+        <main>
+            <section id="job-description">
+                <button onclick="navigateTo('/employeefindjobs')"><img src="https://via.placeholder.com/24" alt="Back Arrow"></button>
+                <h1>Job Description</h1>
+                <div class="description">
+                    <h2>Frontend Developer</h2>
+                    <p><strong>Location:</strong> New York, NY</p>
+                    <p><strong>Skills:</strong> HTML, CSS, JavaScript</p>
+                    <p><strong>Experience:</strong> 2+ years</p>
+                    <p><strong>Salary:</strong> $100,000 - $120,000</p>
+                    <p>We are seeking a talented and passionate Frontend Developer to join our team in New York, NY. The ideal candidate will have a strong foundation in HTML, CSS, and JavaScript, with a proven track record of creating engaging and responsive web applications. You will be responsible for developing and maintaining the user interface components, ensuring a seamless and visually appealing experience for our users.</p>
+                    <button>Apply Now</button>
+                </div>
+                <script>
+                    function navigateTo(url) {
+                        window.location.href = url;
+                    }
+                </script>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

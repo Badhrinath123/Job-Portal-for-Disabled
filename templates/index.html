@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genesis</title>
+    <style>
+        /* Basic reset for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #d0f0c0;
+}
+
+/* Header and navigation bar styling */
+header {
+    background-color: #fff; /* Light green background */
+    padding: 1em 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2em;
+}
+
+.logo {
+    font-size: 2.5em;
+    color: #333; 
+    text-align: left;
+    padding-right:100px;
+}
+.logo:hover {
+    cursor: pointer; /* Change cursor to pointer on hover */}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1em;
+}
+
+nav ul li {
+    position: relative;
+}
+
+nav ul li a {
+    color: #333;
+    text-decoration: none;
+    padding: 0.5em 1em;
+}
+
+/* Dropdown menu styling */
+.dropdown-content {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    color: #333;
+    min-width: 250px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content .column {
+    padding: 15px;
+    width: 170px;
+    /*border-right: 1.5px solid #e0f7e0; /* Vertical line between columns */
+}
+
+
+
+
+.dropdown-content .column:last-child {
+    border-right: none; /* Remove border from the last column */
+}
+
+.dropdown-content h3 {
+    color: #008000;
+    font-family: Arial, Helvetica, sans-serif; /* Green color for column headings */
+}
+
+.dropdown-content a {
+    color: #333;
+    text-decoration: none;
+    display: flex;
+    padding: 0.5em 0;
+    text-align: start;
+
+}
+
+
+
+.dropdown:hover .dropdown-content {
+    display: flex;
+}
+
+
+
+/* Authentication buttons styling */
+.auth-buttons button {
+    background-color:#fff; /* Green background */
+    color: #008000;
+    border: 2px solid;
+    border-radius: 5px;
+    padding: 0.5em 1em;
+    margin-left: 0.5em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.auth-buttons button:hover {
+    background-color: #006400; /* Darker green on hover */
+    color: #fff;
+    
+}
+
+/* Hero section styling */
+.hero-section {
+    background-color: #e0f7e0; /* Light green background */
+    color: #333;
+    text-align: center;
+    padding: 2em 0;
+}
+
+.hero-section h1 {
+    margin-bottom: 1em;
+}
+.job-card {
+    background-color: #FFF; /* White background */
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    display: inline-block;
+    vertical-align: top;
+    flex-direction: column;
+    padding:20px;
+    
+}
+
+.job-card h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    
+}
+
+.job-card p {
+    margin: 5px 0;
+   
+
+}
+
+.job-card button {
+    background-color: #fff; /* Hunter green */
+    color: #355E3B;
+    padding: 10px 20px;
+    border: 2px solid;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    text-align: center;
+}
+
+.job-card button:hover {
+    background-color: #2C4D32;
+    color: #fff; /* Darker Hunter green */
+}
+
+
+.contact-button {
+    display: inline-block;
+    border: 2px solid;
+    padding: 10px 20px;
+    background-color: #fff; /* Button background color */
+    color: #355E3B; /* Button text color */
+    text-decoration: none; /* Remove underline from link */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Show pointer cursor on hover */
+    transition: background-color 0.3s ease;
+}
+
+.contact-button:hover {
+    background-color: #355E3B   ;
+    color: #fff; /* Darker background color on hover */
+}
+
+
+/* Screen reader only text class for accessibility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+
+/* Carousel section styling */
+.carousel {
+    max-width: 1200px;
+    margin: 2em auto;
+    position: relative;
+}
+
+.carousel-item {
+    position: relative;
+    top: 10px; bottom: 10px;
+    text-align: center;
+    color: #fff;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: auto;
+}
+
+.carousel-caption {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1em;
+}
+
+.read-more {
+    background-color: #008000;
+    color: #fff;
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.read-more:hover {
+    background-color: #006400;
+}
+.container1 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 235px;
+    text-align: center;
+}
+.card img {
+    max-width: 100px;
+    margin-bottom: 15px;
+}
+.card h2 {
+    font-size: 1.25em;
+    margin: 10px 0;
+}
+.card p {
+    color: #777;
+    font-size: 0.9em;
+    margin: 10px 0;
+}
+.card .reviews {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9em;
+    margin-bottom: 15px;
+}
+.card .reviews .star {
+    color: #fbc02d;
+    margin-right: 5px;
+}
+.card .view-jobs {
+    background-color: #e0f7fa;
+    color: #00796b;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 1em;
+}
+.card .view-jobs:hover {
+    background-color: #355E3B;
+ color:#fff;
+}
+.image img {
+    max-width: 100%; /* Set the maximum width to 100% of the parent container */
+    height: auto; /* Set the height to auto to maintain the aspect ratio */
+    object-fit: cover; /* Scale the image to cover the entire container */
+    width: 100%; /* Set the width to 100% of the parent container */
+    height: 100vh; /* Set the height to 100% of the viewport height */
+}
+
+.carousel {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.carousel-item {
+    display: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.carousel-item.active {
+    display: flex;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+}
+
+.content h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.content p {
+    font-size: 16px;
+    color: #666;
+}
+
+.read-more-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #008000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.carousel-controls .prev-btn,
+.carousel-controls .next-btn {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.carousel-indicators .indicator {
+    height: 10px;
+    width: 10px;
+    background-color: #ddd;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.carousel-indicators .indicator.active {
+    background-color: #008000;
+}
+
+
+.contact-button {
+    display: inline-block;
+    border: 2px solid;
+    padding: 10px 20px;
+    background-color: #fff; /* Button background color */
+    color: #008000; /* Button text color */
+    text-decoration: none; /* Remove underline from link */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Show pointer cursor on hover */
+    transition: background-color 0.3s ease;
+}
+
+.contact-button:hover {
+    background-color: #008000;
+    color: #fff; /* Darker background color on hover */
+}
+
+
+/* Screen reader only text class for accessibility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+
+/* Carousel section styling */
+.carousel {
+    max-width: 1200px;
+    margin: 2em auto;
+    position: relative;
+}
+
+.carousel-item {
+    position: relative;
+    top: 10px; bottom: 10px;
+    text-align: center;
+    color: #fff;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: auto;
+}
+
+.carousel-caption {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1em;
+}
+
+.read-more {
+    background-color: #008000;
+    color: #fff;
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.read-more:hover {
+    background-color: #006400;
+}
+
+/* Footer styling */
+footer {
+    margin-top: 20px; /* Adjust this margin as needed */
+    padding: 130px;
+    background-color: #e0f7e0; /* Light green background */
+    color: #333;
+    text-align: center;
+    padding: 1em 0;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo" id="logo">Genesis</div>
+            <ul>
+                <!-- Navigation links -->
+                <li><a href="#top">Home</a></li>
+                <li class="dropdown">
+                    
+                </li>
+                <li class="dropdown">
+                    <a href="#jobs">Jobs</a>
+                    <div class="column">
+                        <!-- column content -->
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#companies">Companies</a>
+                    <div class="column">
+                        <!-- column content -->
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="about">About us</a>
+                    <div class="column">
+                        <!-- column content -->
+                    </div>
+                </li>
+            </ul>
+            <div class="auth-buttons">
+                <!-- Login and Signup buttons -->
+                <button class="login" id="loginButton" onclick="navigateTo('/login')">Login</button>
+                <button class="signup" id="signupButton" onclick="navigateTo('/signup')">Signup</button>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <!-- Anchor for home section -->
+        <a id="top"></a>
+        <section id="home" class="hero-section">
+            <h1>Empowering individuals with job opportunities.</h1>
+            <span class="sr-only">Contact Us</span> <!-- Screen reader only text for accessibility -->
+        </section>
+
+        <section>
+           <!---- <div class="image">
+                <img src="job image.jpg" alt="Image description">
+            </div>-->
+        </section>
+        
+        <section class="carousel">
+            <div class="carousel-item active">
+                <div class="content">
+                    <h2>Inclusive Work Environment</h2>
+                    <p>We advocate for inclusive work environments and help businesses create opportunities for disabled individuals to thrive in the workplace.</p>
+                    <a href="javascript:void(0)" class="read-more-btn">Read More</a>
+                </div>
+                <div class="image">
+                    <img src="{{ url_for('static', filename='images/path1.jpg') }}" alt="Employee Advocacy">
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="content">
+                    <h2>Community Engagement</h2>
+                    <p>We actively engage with the community to promote awareness and understanding of the capabilities of disabled individuals in the workforce.</p>
+                    <a href="javascript:void(0)" class="read-more-btn">Read More</a>
+                </div>
+                <div class="image">
+                    <img src="{{ url_for('static', filename='images/path2.jpg') }}" alt="Community Engagement">
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="content">
+                    <h2>Empowering Disabled Individuals</h2>
+                    <p>We provide job patrol services to help disabled individuals find meaningful employment and support them in their professional journey.</p>
+                    <a href="javascript:void(0)" class="read-more-btn">Read More</a>
+                </div>
+                <div class="image">
+                    <img src="{{ url_for('static', filename='images/path3.jpg') }}" alt="Empowering Disabled Individuals">
+                </div>
+            </div>
+            <div class="carousel-controls">
+                <button class="prev-btn" onclick="prevSlide()">‹</button>
+                <button class="next-btn" onclick="nextSlide()">›</button>
+            </div>
+            <div class="carousel-indicators">
+                <span class="indicator active" onclick="currentSlide(0)"></span>
+                <span class="indicator" onclick="currentSlide(1)"></span>
+                <span class="indicator" onclick="currentSlide(2)"></span>
+            </div>
+        </section>
+
+        <section>
+            <div class="image">
+                <img src="{{ url_for('static', filename='images/image.jpg') }}" alt="Image description">
+            </div>
+        </section>
+        <setion id="jobs">
+        <h1 style="text-align: center;margin-bottom: 30px;margin-top:30px">Latest Jobs</h1>
+        <div class="job-card">
+            <h2>Google Backend Developer</h2>
+            <p><strong>Location:</strong> Mountain View, CA</p>
+            <p><strong>Skills:</strong> Java, Python, Cloud Computing</p>
+            <p><strong>Experience:</strong> 3-5 years</p>
+            <p><strong>Salary:</strong> $120,000 - $150,000</p>
+            <button onclick="navigateTo('/login')">Apply Now</button>
+        </div>
+
+        <div class="job-card">
+            <h2>Microsoft Full Stack Developer</h2>
+            <p><strong>Location:</strong> Redmond, WA</p>
+            <p><strong>Skills:</strong> JavaScript, React, Node.js</p>
+            <p><strong>Experience:</strong> 5-7 years</p>
+            <p><strong>Salary:</strong> $130,000 - $160,000</p>
+            <button onclick="navigateTo('/login')">Apply Now</button>
+            </div>
+        
+        <div class="job-card">
+            <h2>Amazon Frontend Developer</h2>
+            <p><strong>Location:</strong> Seattle, WA</p>
+            <p><strong>Skills:</strong> HTML, CSS, JavaScript</p>
+            <p><strong>Experience:</strong> 3-5 years</p>
+            <p><strong>Salary:</strong> $110,000 - $140,000</p>
+            <button onclick="navigateTo('/login')">Apply Now</button>
+        </div>
+
+        <div class="job-card">
+            <h2>Google Backend Developer</h2>
+            <p><strong>Location:</strong> Mountain View, CA</p>
+            <p><strong>Skills:</strong> Java, Python, Cloud Computing</p>
+            <p><strong>Experience:</strong> 3-5 years</p>
+            <p><strong>Salary:</strong> $120,000 - $150,000</p>
+            <button onclick="navigateTo('/login')">Apply Now</button>
+        </div>
+
+        <div class="job-card">
+            <h2>Microsoft Full Stack Developer</h2>
+            <p><strong>Location:</strong> Redmond, WA</p>
+            <p><strong>Skills:</strong> JavaScript, React, Node.js</p>
+            <p><strong>Experience:</strong> 5-7 years</p>
+            <p><strong>Salary:</strong> $130,000 - $160,000</p>
+            <button onclick="navigateTo('/login')">Apply Now</button>
+        </div>
+        
+        <div class="job-card">
+            <h2>Amazon Frontend Developer</h2>
+            <p><strong>Location:</strong> Seattle, WA</p>
+            <p><strong>Skills:</strong> HTML, CSS, JavaScript</p>
+            <p><strong>Experience:</strong> 3-5 years</p>
+            <p><strong>Salary:</strong> $110,000 - $140,000</p>
+            <button onclick="navigateTo('/login')">Apply Now</button>
+        </div>
+
+
+        </div>
+    </section>
+    <body>
+        <setion id="companies">
+        <h1 style="text-align: center;margin-bottom: 30px;margin-top:30px">Companies Hiring</h1>
+
+        <div class="container1">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/fis.jpg') }}" alt="FIS Logo">
+                <h2>FIS</h2>
+                <div class="reviews">
+                    <span class="star">&#9733;</span> 3.9 5K+ reviews
+                </div>
+                <p>FIS is hiring 3 to 10 yrs exp. in C++ & Mumps developer.</p>
+                <a href="#" class="view-jobs">View jobs</a>
+            </div>
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/empower.jpg') }}" alt="empower logo">
+                <h2>Empower</h2>
+                <div class="reviews">
+                    <span class="star">&#9733;</span> 3.7 235 reviews
+                </div>
+                <p>We're a financial services company.</p>
+                <a href="#" class="view-jobs">View jobs</a>
+            </div>
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/standared chartered.jpg') }}" alt="Standard Chartered Logo">
+                <h2>Standard Chartered</h2>
+                <div class="reviews">
+                    <span class="star">&#9733;</span> 3.9 4K+ reviews
+                </div>
+                <p>We strive to be a great place to work & bank.</p>
+                <a href="#" class="view-jobs">View jobs</a>
+            </div>
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/tcs.jpg') }}" alt="Tata Consultancy Services Logo">
+                <h2>Tata Consultancy Services</h2>
+                <div class="reviews">
+                    <span class="star">&#9733;</span> 3.8 76.9K+ reviews
+                </div>
+                <p>Explore challenging and exciting opportunities at TCS</p>
+                <a href="#" class="view-jobs">View jobs</a>
+            </div>
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/cognizant.jpg') }}" alt="cognizant">
+                <h2>cognizant</h2>
+                <div class="reviews">
+                    <span class="star">&#9733;</span> 3.8 76.9K+ reviews
+                </div>
+                <p>Leading ITeS company with global presence.</p>
+                <a href="#" class="view-jobs">View jobs</a>
+            </div>
+            <div class="container1">
+                <div class="card">
+                    <img src="{{ url_for('static', filename='images/icic.jpg') }}" alt="ICICI logo">
+                    <h2>ICICI Bank</h2>
+                    <div class="reviews">
+                        <span class="star">&#9733;</span> 4.3 7K+ reviews
+                    </div>
+                    <p>Leading private sector bank in India.</p>
+                    <a href="#" class="view-jobs">View jobs</a>
+                </div>
+                <div class="card">
+                    <img src="{{ url_for('static', filename='images/airtel.jpg') }}" alt="airtel Logo">
+                    <h2>Airtel</h2>
+                    <div class="reviews">
+                        <span class="star">&#9733;</span> 4.0 235 reviews
+                    </div>
+                    <p>Leading global telecom company.</p>
+                    <a href="#" class="view-jobs">View jobs</a>
+                </div>
+                <div class="card">
+                    <img src="{{ url_for('static', filename='images/amazon.jpg') }}" alt="Standard Chartered Logo">
+                    <h2>Amazon</h2>
+                    <div class="reviews">
+                        <span class="star">&#9733;</span> 4.3 4K+ reviews
+                    </div>
+                    <p>World's largest Internet company.</p>
+                    <a href="#" class="view-jobs">View jobs</a>
+                </div>
+                <div class="card">
+                    <img src="{{ url_for('static', filename='images/jio.jpg') }}" alt="jio Logo">
+                    <h2>Jio</h2>
+                    <div class="reviews">
+                        <span class="star">&#9733;</span> 3.8 76.9K+ reviews
+                    </div>
+                    <p>True 5G is here to unlock the limitless era.</p>
+                    <a href="#" class="view-jobs">View jobs</a>
+                </div>
+                <div class="card">
+                    <img src="{{ url_for('static', filename='images/capgemini.jpg') }}" alt="capgemini Logo">
+                    <h2>Capgemini</h2>
+                    <div class="reviews">
+                        <span class="star">&#9733;</span> 3.9 76.9K+ reviews
+                    </div>
+                    <p>Global leader in technology services.</p>
+                    <a href="#" class="view-jobs">View jobs</a>
+                </div>
+            </setion>
+        </div>
+    </main>
+
+    <footer>
+         <div class="text-white text-center p-1 bg-theme" id="footer">
+            <div class="pb-1">
+                <a href="/contactus">Contact Us</a> | 
+                <a href="/feedback">Feedback</a> | 
+                <a href="#services.html">Terms</a> | 
+                <a href="#jobs.html">Privacy & Policies</a>
+            </div>
+            All rights reserved Genesis Jobs - 2024
+        </div>
+    </footer>
+<script>
+    function navigateTo(url) {
+            window.location.href = url;
+        }
+    let currentIndex = 0;
+        const items = document.querySelectorAll('.carousel-item');
+        const indicators = document.querySelectorAll('.indicator');
+
+        function showSlide(index) {
+            // Validate index
+            if (index < 0 || index >= items.length) return;
+
+            // Hide all items and deactivate all indicators
+            items.forEach(item => item.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+
+            // Show the requested slide and activate the corresponding indicator
+            items[index].classList.add('active');
+            indicators[index].classList.add('active');
+
+            // Update currentIndex
+            currentIndex = index;
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % items.length;
+            showSlide(currentIndex);
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            showSlide(currentIndex);
+        }
+
+        function currentSlide(index) {
+            showSlide(index);
+        }
+
+        // Initialize the first slide
+        showSlide(currentIndex);
+    </script>
+</body>
+</html>

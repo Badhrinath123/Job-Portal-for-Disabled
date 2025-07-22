@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genesis</title>
+    <link rel="stylesheet" href="home.css">
+    <style>
+        /* Basic reset for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Hide scroll bars */
+body, html {
+    overflow: hidden;
+}
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e0f7e0;
+    padding: 20px;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #333;
+}
+
+/* Header styling */
+header {
+    flex-shrink: 0;
+    background-color: white;
+    padding: 1em 0;
+}
+
+/* Navigation bar styling */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2em;
+}
+
+.logo {
+    font-size: 2.5em;
+    color: #333;
+    text-align: left;
+    padding-right: 100px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1em;
+}
+
+nav ul li {
+    position: relative;
+}
+
+nav ul li a {
+    color: #333;
+    text-decoration: none;
+    padding: 0.5em 1em;
+}
+
+/* Dropdown menu styling */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    color: #333;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content .column {
+    padding: 15px;
+    width: 170px;
+    border-right: 1.5px solid #e0f7e0;
+}
+
+.dropdown-content .column:last-child {
+    border-right: none;
+}
+
+.dropdown-content h3 {
+    color: #008000;
+}
+
+.dropdown-content a {
+    color: #333;
+    text-decoration: none;
+    display: flex;
+    padding: 0.5em 0;
+    text-align: start;
+}
+
+.dropdown:hover .dropdown-content {
+    display: flex;
+}
+
+/* Authentication buttons styling */
+.auth-buttons button {
+    background-color: #ebe6e6;
+    color: #008000;
+    border: 2px solid;
+    border-radius: 5px;
+    padding: 0.5em 1em;
+    margin-left: 0.5em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.auth-buttons button:hover {
+    background-color: #006400;
+    color: #fff;
+}
+
+/* Main content styling */
+.main-content {
+    display: flex;
+    flex: 1;
+    overflow: auto;
+}
+
+/* Sidebar styling */
+.sidebar {
+    width: 200px;
+    margin-right: 20px;
+    flex-shrink: 0;
+    background-color: #e0f7e0;
+    padding: 10px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #ecf1ec;
+    color: #0f0f0f;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.sidebar-button:hover {
+    background-color: #006600;
+}
+
+/* Main section styling */
+main {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+/* Hero section styling */
+.hero-section {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #e0f7e0;
+}
+
+.hero-section h1 {
+    margin-bottom: 1em;
+}
+
+.hero-section img {
+    width: 120%;
+    border-radius: 10px;
+    display: block;
+}
+
+.hero-text {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.contact-button {
+    display: inline-block;
+    border: 2px solid #008000;
+    padding: 10px 20px;
+    background-color: #eeefee;
+    color: #008000;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-button:hover {
+    background-color: #008000;
+    color: #fff;
+}
+
+/* Search bar container styling */
+.search-bar-container {
+    position: absolute;
+    top: calc(20% + 2cm);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 5px 10px;
+    max-width: 800px;
+    width: 80%;
+}
+
+.search-bar-container input,
+.search-bar-container select,
+.search-bar-container button {
+    border: none;
+    outline: none;
+    margin: 0 5px;
+}
+
+.search-bar-container input {
+    flex-grow: 1;
+}
+
+.search-bar-container button {
+    background-color: #008000;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.search-bar-container button:hover {
+    background-color: #006600;
+}
+
+/* Container styling */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+input,
+select,
+button {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: #008000;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #006600;
+}
+
+/* Styles for the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+th {
+    background-color: #008000;
+    color: white;
+    text-align: left;
+}
+
+td {
+    background-color: #e0f7e0;
+}
+
+/* Screen reader only text class for accessibility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* Carousel section styling */
+.carousel {
+    max-width: 1200px;
+    margin: 2em auto;
+    position: relative;
+    display: flex;
+    overflow-x: hidden;
+}
+
+.carousel-item {
+    min-width: 300px;
+    margin-right: 20px;
+}
+
+.carousel-item img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.carousel-caption {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1em;
+}
+
+.read-more {
+    background-color: #008000;
+    color: #fff;
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.read-more:hover {
+    background-color: #006400;
+}
+
+/* Footer styling */
+footer {
+    margin-top: 20px;
+    background-color: #e0f7e0;
+    color: #333;
+    text-align: center;
+    padding: 1em 0;
+}
+
+/* Aside styling */
+aside {
+    padding-top: 90px;
+}
+
+/* Hidden class */
+.hidden {
+    display: none;
+}
+
+/* Remove scroll bar for WebKit browsers */
+body::-webkit-scrollbar, html::-webkit-scrollbar {
+    display: none;
+}
+
+    </style>
+    <script>
+        function openSearchPage() {
+            window.location.href = 'searchresults.html';
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Genesis</div>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="about.html">About us</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button class="logout">
+                    <a href="{{ url_for('login') }}" class="logout-button">Logout</a>
+                    <span class="sr-only">Logout</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main-content">
+        <aside class="sidebar">
+            <button class="sidebar-button" onclick="location.href='postjob'">Post a Job</button>
+            <button class="sidebar-button" onclick="showsection('jobsposted')">Jobs Posted</button>
+            <button class="sidebar-button" onclick="showSection('reports')">Reports</button>
+            <button class="sidebar-button" onclick="showSection('shortlisted')">Shortlisted</button>
+        </aside>
+
+        <main>
+            <section id="home"  class="hero-section">
+                <div class="hero-text">Empowering individuals with job opportunities</div>
+                <div class="search-bar-container">
+                    <input type="text" placeholder="Enter skills / designations / companies">
+                    <select>
+                        <option value="">Sort by company</option>
+                        <option value="Google">Google</option>
+                        <option value="Amazon">Amazon</option>
+                        <option value="MNC">MNC</option>
+                        <option value="Microsoft">Microsoft</option>
+                    </select>
+                    <select>
+                        <option value="Sort by job">Sort by job</option>
+                        <option value="Full stack developer">Full stack developer</option>
+                        <option value="Frontend developer">Front-end developer</option>
+                        <option value="Backend developer">Backend developer</option>
+                        <option value="Testing">Testing</option>
+                    </select>
+                    <form action="{{ url_for('searchresultsb') }}" method="GET"></form>
+                    <button class="searchbar-button" id="searchButton" >Search</button>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

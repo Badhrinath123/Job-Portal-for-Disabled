@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - Job Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 400px;
+            margin: 20px auto;
+            width: 100%;
+            padding: 40px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .h2 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        .button {
+            background-color: #fff;
+            color: #008000;
+            border: 2px solid;
+            border-radius: 5px;
+            padding: 0.5em 1em;
+            margin-left: 0.5em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #008000;
+            color: #fff;
+        }
+        .forgot-password {
+            margin-top: 10px;
+            text-align: right;
+        }
+        .forgot-password a {
+            color: #008000;
+            text-decoration: none;
+        }
+        .forgot-password a:hover {
+            color: #23527c;
+        }
+        .container p a {
+            color: #008000;
+        }
+        .error-message {
+            color: red;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 style="color:#008000;">
+            <center>Login</center>
+        </h2>
+        <form id="login-form">
+            <div class="error-message" id="error-message"></div>
+            <div class="form-group">
+                <label class="label" for="email">Email:</label>
+                <input type="email" id="email" class="input-field" required>
+            </div>
+            <div class="form-group">
+                <label class="label" for="password">Password:</label>
+                <input type="password" id="password" class="input-field" required>
+            </div>
+            <button class="button" type="submit">Login</button>
+            <div class="forgot-password">
+                <a href="{{ url_for('sendotp') }}">Forgot Password?</a>
+            </div>
+        </form>
+        <p>Don't have an account? <a href="{{ url_for('dashboardsignup') }}">Create Account</a></p>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: document.getElementById('email').value,
+                    password: document.getElementById('password').value
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = data.redirect_url;
+                } else {
+                    document.getElementById('error-message').innerText = data.error;
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                document.getElementById('error-message').innerText = 'Error logging in. Please try again later.';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genesis - Employee Dashboard</title>
+    <style>
+html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #D0F0C0; /* Tea green */
+            color: #355E3B; /* Hunter green */
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #FFF; /* White background for the navigation row */
+            color: #355E3B; /* Hunter green text */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        header nav ul li {
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            color: #355E3B; /* Hunter green text */
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        header .auth-buttons {
+            display: flex;
+        }
+
+        header .auth-buttons button {
+            background-color: #D0F0C0; /* Tea green */
+            color: #000; /* Black text */
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .main-content {
+            display: flex;
+            padding: 20px;
+            flex: 1;
+        }
+
+        .sidebar {
+            width: 200px;
+            margin-right: 20px;
+            background-color: #355E3B; /* Hunter green */
+            padding: 15px;
+            color: #FFF; /* White text */
+            border-radius: 5px;
+        }
+
+        .sidebar-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #355E3B; /* Hunter green */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: left;
+        }
+
+        .sidebar-button:hover {
+            background-color: #2C4D32; /* Darker Hunter green */
+        }
+
+        main {
+            height: 500px;
+            overflow-y: auto;
+            flex-grow: 1;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #355E3B; /* Hunter green */
+            color: #ecf0f1; /* Light text */
+            border-radius: 5px;
+        }
+
+        .hero-section h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .hero-section .contact-button {
+            background-color: #e74c3c;
+            color: #FFF; /* White text */
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero-section .contact-button:hover {
+            background-color: #c0392b;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #FFF; /* White background */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="email"] {
+            width: 98%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button[type="submit"] {
+            background-color: #355E3B; /* Hunter green */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #2C4D32; /* Darker Hunter green */
+        }
+        input,
+        select,
+        button {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #355E3B; /* Hunter green */
+            color: #FFF; /* White text */
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Genesis</div>
+        <nav>
+            <ul>
+                <li><a href="employerdashboard">Home</a></li>
+                <li class="dropdown">
+                    <a href="#Employees">Employees</a>
+                </li>
+                <li class="dropdown">
+                    <a href="employerjobposted">Jobs</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#companies">Companies</a>
+                </li>
+                <li><a href="employerabout">About us</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <button><a href="{{ url_for('index') }}">Logout</a></button>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <aside class="sidebar">
+            <button class="sidebar-button" onclick="navigateTo('/employerpostjob')">Post a Job</button>
+            <button class="sidebar-button" onclick="navigateTo('/employerjobposted')">Jobs Posted</button>
+            <button class="sidebar-button" onclick="navigateTo('/employerreports')">Reports</button>
+            <button class="sidebar-button" onclick="navigateTo('/employershortlisted')">Shortlisted</button>
+        </aside>
+
+        <main>
+            <div class="form-container">
+                <h1>Post a Job</h1>
+                <form action="{{ url_for('submit_job') }}" method="post">
+                    <label for="company-name">Company Name</label>
+                    <input type="text" id="company-name" name="company-name" required>
+
+                    <label for="job-role">Job Role</label>
+                    <input type="text" id="job-role" name="job-role" required>
+
+                    <label for="experience-years">Experience</label>
+                    <div class="experience-selects">
+                        <select id="experience-years" name="experience-years">
+                            <option value="0">0 years</option>
+                            <option value="1">1 year</option>
+                            <option value="2">2 years</option>
+                            <option value="3">3 years</option>
+                            <option value="4">4 years</option>
+                        </select>
+                        <select id="experience-months" name="experience-months">
+                            <option value="0">0 months</option>
+                            <option value="1">1 month</option>
+                            <option value="2">2 months</option>
+                            <option value="3">3 months</option>
+                            <option value="4">4 months</option>
+                            <option value="5">5 months</option>
+                            <option value="6">6 months</option>
+                            <option value="7">7 months</option>
+                            <option value="8">8 months</option>
+                            <option value="9">9 months</option>
+                            <option value="10">10 months</option>
+                            <option value="11">11 months</option>
+                        </select>
+                        
+                    </div>
+
+                    <label for="salary">Salary</label>
+                    <input type="text" id="salary" name="salary" required>
+
+                    <label for="mode">Mode</label>
+                    <select id="mode" name="mode">
+                        <option value="full-time">Full-time</option>
+                        <option value="part-time">Part-time</option>
+                        <option value="remote">Remote</option>
+                    </select>
+
+                    <label for="technology-stack">Required Technology Stack</label>
+                    <input type="text" id="technology-stack" name="technology-stack" required>
+
+                    <label for="comp-loc">Company Location</label>
+                    <input type="text" id="comp-loc" name="comp-loc" required>
+
+                    <label for="job-description">Job Description</label>
+                    <textarea id="job-description" name="job-description" rows="4" required></textarea>
+
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function navigateTo(url) {
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>

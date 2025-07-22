@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genesis</title>
+    <style>
+        body {
+            background-color: #D0F0C0; /* Tea green */
+            color: #355E3B; /* Hunter green text */
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            background-color: #FFF; /* White background for the navigation row */
+            color: #355E3B; /* Hunter green text */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        header nav ul li {
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            color: #355E3B; /* Hunter green text */
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        header .auth-buttons {
+            display: flex;
+        }
+
+        header .auth-buttons button {
+            background-color: #D0F0C0; /* Tea green */
+            color: #355E3B; /* Hunter green text */
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        header .auth-buttons button a {
+            color: black; /* Black text for logout button */
+            text-decoration: none;
+        }
+
+        header .auth-buttons button:hover {
+            background-color: #C9E8B2; /* Lighter Tea green */
+        }
+        
+        .main-content {
+            display: flex;
+            padding: 20px;
+            flex: 1;
+            overflow: auto
+        }
+
+        .sidebar {
+            height: 500px;
+            width: 200px;
+            margin-right: 20px;
+            background-color: #355E3B; /* Hunter green */
+            padding: 15px;
+            color: #FFF; /* White text */
+            border-radius: 5px;
+        }
+
+        .sidebar-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #355E3B; /* Hunter green */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: left;
+        }
+
+        .sidebar-button:hover {
+            background-color: #2C4D32; /* Darker Hunter green */
+        }
+        main {
+            height:500px;
+            overflow-y: auto;
+            flex-grow: 1;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+        .hero-section {
+            text-align: center;
+        }
+        .contact-button {
+            background-color: #355E3B; /* Hunter green */
+            color: #FFF; /* White text */
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+        .carousel-item img {
+            width: 100%;
+            height: auto;
+        }
+        .hidden {
+            display: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-content {
+            background-color: #355E3B; /* Hunter green */
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            color: white;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        label, input, textarea {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        input, textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button[type="submit"] {
+            background-color: #355E3B; /* Hunter green */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .hero-section {
+        position: relative;
+        text-align: center;
+        color: white;
+        padding-top: 50px;
+    }
+
+    .hero-section img {
+        width: 120%;
+        border-radius: 10px;
+        display: block;
+    }
+
+    .hero-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 24px;
+        font-weight: bold;
+        color: black; /* Updated to black text */
+    }
+    .contact-button {
+        position: absolute;
+        top: calc(20% + 5cm);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #008000;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .contact-button:hover {
+        background-color: #006600;
+    }
+
+    .search-bar-container {
+        position: absolute;
+        top: calc(20% + 3cm);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: center;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 25px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 5px 10px;
+        width: 100%; /* Increased width */
+        max-width: 1200px; /* Max width */
+        font-size: 0.9em; /* Decreased font size */
+    }
+
+    .search-bar-container input,
+    .search-bar-container select,
+    .search-bar-container button {
+        border: none;
+        outline: none;
+        margin: 5px;
+        font-size: 0.9em; /* Decreased font size */
+    }
+
+    .search-bar-container input {
+        flex-grow: 1;
+    }
+
+    .search-bar-container select {
+        padding: 6px;
+        border-radius: 6px;
+    }
+
+    .search-bar-container button {
+        background-color: #008000;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 20px;
+        cursor: pointer;
+    }
+
+    .search-bar-container button:hover {
+        background-color: #006600;
+    }
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        } 
+    </style>
+    <script>
+        function navigateTo(url) {
+            window.location.href = url;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">Genesis</div>
+        <nav>
+            <ul>
+                <!-- Navigation links -->
+                <li><a href="employerdashboard">Home</a></li>
+                <li class="dropdown">
+                    <a href="#Employees">Employees</a>
+                </li>
+                <li class="dropdown">
+                    <a href="employerjobposted">Jobs</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#companies">Companies</a>
+                </li>
+                <li><a href="employerabout">About us</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <!-- Logout button -->
+            <button class="logout">
+                <a href="{{url_for('index')}}">Logout</a>
+            </button>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <aside class="sidebar" >
+            <button class="sidebar-button" onclick="navigateTo('/employerpostjob')">Post a Job</button>
+            <button class="sidebar-button" onclick="navigateTo('/employerjobposted')">Jobs Posted</button>
+            <button class="sidebar-button" onclick="navigateTo('/employerreports')">Reports</button>
+            <button class="sidebar-button" onclick="navigateTo('/employershortlisted')">Shortlisted</button>
+        </aside>
+
+        <main>
+            <!-- Anchor for home section -->
+            <section id="home" class="hero-section">
+                <div class="hero-text">Empowering individuals with job opportunities</div>
+                <div class="search-bar-container">
+                    <input type="text" placeholder="Enter skills / designations / companies">
+                    <select>
+                        <option value="">Sort by company</option>
+                        <option value="Google">Google</option>
+                        <option value="Amazon">Amazon</option>
+                        <option value="MNC">MNC</option>
+                        <option value="Microsoft">Microsoft</option>
+                    </select>
+                    <select>
+                        <option value="Sort by job">Sort by job</option>
+                        <option value="Full stack developer">Full stack developer</option>
+                        <option value="Frontend developer">Front-end developer</option>
+                        <option value="Backend developer">Backend developer</option>
+                        <option value="Testing">Testing</option>
+                    </select>
+                    <select>
+                        <option value="experience">Sort by experience</option>
+                        <option value="0-1 year">0-1 year</option>
+                        <option value="1-3 years">1-3 years</option>
+                        <option value="3-5 years">3-5 years</option>
+                        <option value="5+ years">5+ years</option>
+                    </select>
+                    <select>
+                        <option value="location">Sort by location</option>
+                        <option value="New York">New York</option>
+                        <option value="San Francisco">San Francisco</option>
+                        <option value="Los Angeles">Los Angeles</option>
+                        <option value="Chicago">Chicago</option>
+                    </select>
+                    <select>
+                        <option value="salary">Sort by salary</option>
+                        <option value="0-50k">$0-50k</option>
+                        <option value="50-100k">$50-100k</option>
+                        <option value="100-150k">$100-150k</option>
+                        <option value="150k+">$150k+</option>
+                    </select>
+                    <button class="searchbar-button" id="searchButton" onclick="openSearchPage()">Search</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Genesis. All rights reserved.</p>
+    </footer>
+        </div>
+    </div>
+</body>
+</html>

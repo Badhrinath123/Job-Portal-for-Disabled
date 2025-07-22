@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification - JobPortal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9fafb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .verification-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        .verification-container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .verification-container p {
+            font-size: 16px;
+            margin-bottom: 30px;
+            color: #666;
+        }
+        .otp-inputs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .otp-inputs input {
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .verification-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .verification-container button:hover {
+            background-color: #218838;
+        }
+        .resend-link {
+            display: block;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .resend-link:hover {
+            text-decoration: underline;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="verification-container">
+        <h1>Email Verification</h1>
+        <p>Please enter the 6-digit OTP sent to your email:</p>
+        <form id="verificationForm" action="{{ url_for('emailverificationforsignup') }}" method="POST">
+            <div class="otp-inputs">
+                <input type="text" name="otp1" maxlength="1" pattern="\d" required>
+                <input type="text" name="otp2" maxlength="1" pattern="\d" required>
+                <input type="text" name="otp3" maxlength="1" pattern="\d" required>
+                <input type="text" name="otp4" maxlength="1" pattern="\d" required>
+                <input type="text" name="otp5" maxlength="1" pattern="\d" required>
+                <input type="text" name="otp6" maxlength="1" pattern="\d" required>
+            </div>
+            <button type="submit">Verify</button>
+        </form>
+        <a href="#" class="resend-link" id="resendLink">Resend OTP</a>
+        <div class="message" id="message"></div>
+    </div>
+
+    <script>
+        const inputs = document.querySelectorAll('.otp-inputs input');
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', () => {
+                if (input.value.length === 1 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            });
+        });
+
+        document.getElementById('resendLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            const message = document.getElementById('message');
+            message.style.color = 'blue';
+            message.textContent = 'OTP has been resent to your email.';
+        });
+
+        // Function to handle form submission success alert
+        const verificationForm = document.getElementById('verificationForm');
+        verificationForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Simulate form submission (you can add actual form submission logic here if needed)
+            // For demonstration purposes, alert is shown after a delay
+            setTimeout(function() {
+                alert('Successfully verified!'); // Display alert
+                window.location.href = '/login'; // Redirect to login page after alert
+            }, 1000); // Adjust delay as needed
+        });
+    </script>
+</body>
+</html>
